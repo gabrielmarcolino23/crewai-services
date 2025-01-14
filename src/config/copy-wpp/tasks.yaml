@@ -1,0 +1,83 @@
+promptBuilder_task:
+  description: >
+    Criar um prompt estruturado para gerar uma mensagem persuasiva e personalizada para uma campanha de WhatsApp, considerando:
+    O objetivo da campanha que é: {objetivo_copy}
+    O tom de voz da comunicação: {tom_de_voz}
+    O público-alvo a ser atingido: {publico_alvo}
+    O segmento da loja é: {segmento_loja}
+  expected_output: >
+    Crie um prompt em português que oriente a criação de uma mensagem de WhatsApp que será disparada para clientes de uma loja virtual do segmento {segmento_loja}, e deve seguir as seguintes diretrizes:
+    A mensagem deve ser direcionada para {publico_alvo}, o tom de voz da comunicação deve ser {tom_de_voz} e o objetivo da campanha é {objetivo_copy}.
+    O output final dever ser apenas o prompt estruturado, sem a copy final e você não deve sugirir variaveis dinamicas.
+  agent: promptBuilder
+
+variableSuggester_task:
+  description: >
+    Sugira variáveis internas da Zoppy que podem ser utilizadas em uma copy personalizada para uma campanha de WhatsApp, considerando:
+    O objetivo da campanha: {objetivo_copy}
+    O tom de voz da comunicação: {tom_de_voz}
+    O público-alvo a ser atingido: {publico_alvo}
+
+    VARIÁVEIS DISPONÍVEIS:
+
+    CLIENTE
+    - [client_first_name]: Primeiro nome do cliente. Use para personalização básica.
+    - [last_purchase_date]: Data da última compra. Ideal para reativação de clientes inativos.
+    - [birthday_day][birthday_month]: Dia e mês de aniversário. Use em campanhas comemorativas.
+
+    GIFTBACK
+    - [giftback_code]: Código do desconto. Essencial em campanhas de Giftback.
+    - [giftback_expiry_date]: Data de validade do Giftback. Cria senso de urgência.
+    - [giftback_amount]: Valor do Giftback. Comunica o benefício.
+    - [giftback_minimum_purchase_value]: Valor mínimo para uso. Explica condições.
+
+    PEDIDO
+    - [order_code]: Código do pedido. Use em confirmações e status.
+    - [abandoned_cart_url]: Link do carrinho abandonado. Para recuperação.
+
+    EMPRESA
+    - [company_name]: Nome da empresa. Para reforçar a marca.
+    - [seller_coupon]: Cupom personalizado do vendedor. Para fidelização.
+    - [store_url]: Link da loja. Para direcionar tráfego.
+    - [seller_name]: Nome do vendedor. Para atendimento personalizado.
+
+  expected_output: >
+    Liste apenas as variáveis mais relevantes para este contexto, com breve justificativa para cada escolha.
+    Você só pode sugerir variáveis disponíveis na lista.
+    Em hipótese alguma, você deve criar variáveis novas ou criar exemplos de copys.
+  agent: variableSuggester
+
+copywriter_task:
+  description: >
+    Escrever uma copy persuasiva e personalizada para uma campanha de WhatsApp, seguindo o playbook de copy disponibilizado abaixo:
+    
+    PLAYBOOK DE COPY:
+
+    ESTRUTURA BASE:
+    1. Saudação personalizada ([client_first_name] + emoji)
+    2. Gancho/Contexto (1-2 linhas)
+    3. Benefício principal + detalhes
+    4. Elemento de urgência (se aplicável)
+
+    REGRAS:
+    - Máx 500 caracteres
+    - Inclua quebras de linha entre os elementos da estrura da copy. (não usar "\n").
+    - Utilize emojis estrategicamente para reforçar a mensagem e manter uma paleta de cores harmônica.
+    - Inclua uma chamada para ação (CTA) clara e atraente.
+    - Insira apenas as variaveis que estão na instução.
+    - O único link que você pode usar é o [store_url].
+
+    CENÁRIO ATUAL:
+    Objetivo: {objetivo_copy}
+    Tom: {tom_de_voz}
+    Público: {publico_alvo}
+    Segmento da loja: {segmento_loja}
+
+  expected_output: >
+    Apenas a copy final seguindo o playbook de copy disponibilizado.
+  agent: copywriter
+
+  
+
+
+  

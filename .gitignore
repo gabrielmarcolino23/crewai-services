@@ -4,3 +4,12 @@ __pycache__
 teste.py
 venv/
 db/
+traningDataset/
+
+.npmrc
+.venv
+
+copyemail/  
+
+wpp.jsonl
+

@@ -1,0 +1,60 @@
+segment_builder_task:
+  description: >
+    Sua tarefa é criar um segmento de clientes com base nessa descrição {prompt}.
+    O dia de hoje é {data_atual}.
+
+    **Como construir um segmento:**
+    
+    - Um **segmento** é uma coleção de **grupos de segmentos**.
+    - Cada **grupo de segmentos** consiste em um array de **regras**.
+    - Um cliente pertence a um segmento se atender a todos os critérios em pelo menos um dos grupos de segmentos.
+    
+    **Estrutura de uma regra:**
+
+    - **type**: O tipo da regra (por exemplo, 'SEGMENT_AGE', 'SEGMENT_REGION').
+    - **value**: Um array contendo o(s) valor(es) que a regra verifica.
+    - **operator**: O operador usado (por exemplo, 'EQUAL', 'IS_BETWEEN', 'GREATER_THAN'). Se não especificado, 'EQUAL' é o padrão.
+    - **variableType**: O tipo de dado do valor ('TEXT', 'DATE' ou 'NUMBER'). Se não especificado, 'TEXT' é o padrão.
+    - **dateUnit**: Unidade opcional para operações de data ('DAY', 'MONTH', 'YEAR'). Padrão é 'DAY'.
+
+    **Tipos de regras disponíveis e seus valores esperados:**
+
+    - **SEGMENT_GENDER**: value deve ser um array com 'f' ou 'm'.
+    - **SEGMENT_AGE**: Regra numérica.
+    - **SEGMENT_REGION**: value deve ser um array com siglas de estados brasileiros (por exemplo, 'SP', 'RJ').
+    - **SEGMENT_NPS_PROFILE**: value é um array com 'promoter', 'neutral', 'detractor'.
+    - **SEGMENT_NPS_GRADE**: Regra numérica de 0 a 10.
+    - **SEGMENT_RFM_PROFILE**: value é um array com 'almost-sleeping', 'at-risk', 'cant-lose', 'champion', 'loyal', 'need-attention', 'new', 'possible-loyal', 'promising', 'sleeping'.
+    - **SEGMENT_LAST_ORDER_DATE**: Operador de data, usado com variableType 'DATE'.
+    - **SEGMENT_LAST_ORDER_VALUE**: Regra numérica.
+    - **SEGMENT_BIRTH_DATE**: Operador de data, usado com variableType 'DATE'.
+    - **SEGMENT_ORDER_STATUS**: value é um array com 'completed', 'on-hold', 'canceled'.
+    - **SEGMENT_TOTAL_SALES**, **SEGMENT_TOTAL_AMOUNT**, **SEGMENT_AVERAGE_TICKET**: Regras numéricas.
+    - **SEGMENT_GIFTBACK_STATUS**: value é um array com 'active' ou 'expired'.
+    - **SEGMENT_LAST_PURCHASE_PRODUCTS**: value é um array com IDs de produtos.
+    - **SEGMENT_PRODUCTS**: value é um array com IDs de produtos.
+
+    **Operadores disponíveis:**
+
+    - **IN_THE_LAST**, **IN_THE_NEXT**: Usados apenas com regras de data.
+    - **IS_BETWEEN**: Usado com regras de data e número; value deve ter dois valores (limite inferior e superior).
+    - **EQUAL**: Operador padrão; use quando em dúvida.
+    - **GREATER_THAN**, **LESS_THAN**: Usados apenas com regras numéricas.
+    - **GREATER_THAN_OR_EQUAL**, **LESS_THAN_OR_EQUAL**: Usados com regras de data e número.
+
+    **Notas:**
+
+    - O **value** geralmente é um array que consiste em um ou mais valores, dependendo da regra e do operador.
+    - Para o operador **IS_BETWEEN**, o array **value** deve conter exatamente dois valores: o limite inferior e o superior.
+    - Os valores são qualificados por **variableType**:
+      - **TEXT**: Padrão; use quando em dúvida.
+      - **DATE**: Valores devem ser strings de data no formato 'YYYY-MM-DD'.
+      - **NUMBER**: Para valores numéricos.
+
+    **Importante:**
+    - **Sua resposta deve conter apenas o array JSON válido dos grupos de segmentos, sem texto ou explicações adicionais.**
+
+  expected_output: |
+    Um array JSON de contendo um segmento de clientes com essa descrição: {prompt}.
+
+  agent: segment_builder

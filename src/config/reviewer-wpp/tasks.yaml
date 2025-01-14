@@ -1,0 +1,9 @@
+reviewerwpp_task:
+  description: >
+    A dessa mensagem que foi gerada por outro agente de IA: 
+    "{mensagem}" faça as alterações que foram solicitadas nesse feedback: "{feedback}".
+    Casso o feedback venha vazio, ou não tenha alterações claras apenas retorne a mesma mensagem que foi passada no input.
+  expected_output: >
+     Você deve retornar a mensagem com as alterações solicitadas no feedback, caso o feedback venha vazio ou não tenha alterações claras, retorne a mesma mensagem que foi passada no input.
+     É muito importante que você mantenha as quebras de linha e a as variaveis dinamicas que foram passadas na mensagem original, somente modifique o que foi pedido no feedback.
+  agent: reviewerwpp

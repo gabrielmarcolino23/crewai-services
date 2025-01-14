@@ -1,0 +1,109 @@
+promptBuilder_task:
+  description: >
+    Criar um prompt estruturado para gerar um assunto e uma mensagem persuasiva e personalizada para uma campanha de Email, considerando:
+    O objetivo da campanha que é: {objetivo_copy}
+    O tom de voz da comunicação: {tom_de_voz}
+    O público-alvo a ser atingido: {publico_alvo}
+  expected_output: >
+    Crie um prompt em português que oriente a criação de uma mensagem e um assunto de Email seguindo estas diretrizes:
+    A mensagem deve ser direcionada para {publico_alvo}, o tom de voz da comunicação deve ser {tom_de_voz} e o objetivo da campanha é {objetivo_copy}.
+    O output final dever ser apenas o prompt estruturado, sem a copy final.
+
+variableSuggester_task:
+  description: >
+    Sugira variáveis internas da Zoppy que podem ser utilizadas em uma copy personalizada para uma campanha de Email, considerando:
+    O objetivo da campanha: {objetivo_copy}
+    O tom de voz da comunicação: {tom_de_voz}
+    O público-alvo a ser atingido: {publico_alvo}
+
+    VARIÁVEIS DISPONÍVEIS:
+
+    CLIENTE
+    - [client_first_name]: Primeiro nome do cliente. Use para personalização básica.
+    - [client_last_name]: Sobrenome do cliente. Use para comunicações formais.
+    - [last_purchase_date]: Data da última compra. Ideal para reativação de clientes inativos.
+    - [birthday_day][birthday_month]: Dia e mês de aniversário. Use em campanhas comemorativas.
+    - [age]: Idade do cliente. Útil para segmentação por faixa etária.
+    - [product_list]: Lista de produtos da última compra. Use para cross-sell/upsell.
+
+    GIFTBACK
+    - [giftback_code]: Código do desconto. Essencial em campanhas de Giftback.
+    - [giftback_expiry_date]: Data de validade do Giftback. Cria senso de urgência.
+    - [giftback_amount]: Valor do Giftback. Comunica o benefício.
+    - [giftback_minimum_purchase_value]: Valor mínimo para uso. Explica condições.
+
+    PEDIDO
+    - [order_code]: Código do pedido. Use em confirmações e status.
+    - [abandoned_cart_url]: Link do carrinho abandonado. Para recuperação.
+
+    NPS
+    - [nps_link]: Link para avaliação. Use em pesquisas de satisfação.
+    - [nps_product_rating]: Nota do produto. Para feedback específico.
+    - [nps_service_rating]: Nota do serviço. Para feedback do atendimento.
+    - [nps_rating]: Nota geral. Para feedback geral.
+
+    EMPRESA
+    - [seller_coupon]: Cupom personalizado do vendedor. Para fidelização.
+    - [store_url]: Link da loja. Para direcionar tráfego.
+    - [seller_name]: Nome do vendedor. Para atendimento personalizado.
+
+  expected_output: >
+    Liste apenas as variáveis mais relevantes para este contexto, com breve justificativa para cada escolha.
+    Você só pode sugerir variáveis disponíveis na lista.
+
+copywriter_task:
+  description: >
+    Escrever uma copy persuasiva e personalizada para uma campanha de Email, incluindo o assunto e o corpo do email de maneira separada.
+    Escreva o corpo da mensagem considerando que este será colado em um HTML que será renderizado em um email.
+    O corpo da mensagem deverá estar contido em um fragmento de HTML (sem a tag <html>), com as devidas tags de formatação para dar ênfase ao conteúdo da mensagem.
+    Disponibilizado abaixo, está um playbook para geração de Copys eficazes que deve ser utilizado como guia, porém não precisa ser seguido à risca.:
+
+
+    PLAYBOOK DE COPY:
+
+    ESTRUTURA BASE:
+    1. Saudação personalizada
+    2. Gancho/Contexto (1-2 linhas)
+    3. Benefício principal + detalhes
+    4. Elemento de urgência (se aplicável)
+    5. Call-to-action claro
+    6. Fechamento
+
+    REGRAS:
+    - Inclua tags de quebra de linha quando necessário <br>. Não utilize \n.
+    - Use tags do HTML para destacar informações importantes (negrito, itálico, headings, etc)
+    - Evite textos muito longos
+    - Uma CTA principal
+    - Variáveis naturalmente inseridas
+
+    CENÁRIO ATUAL:
+    Objetivo: {objetivo_copy}
+    Tom: {tom_de_voz}
+    Público: {publico_alvo}
+
+  expected_output: >
+    Copy final, contendo o assunto e o corpo do email, seguindo as diretrizes do playbook e considerando o cenário atual.
+
+tarefa_extrair_inputs:
+  description: >
+    Analise as entradas fornecidas pelo usuário para criar um framework estratégico de mensagens.
+    As entradas incluem objetivo da campanha, tom de voz e público-alvo.
+    Entenda que um público-alvo corresponde a um segmento específico de clientes com características e necessidades semelhantes, e a mensagem gerada deve ressoar com eles.
+  expected_output: >
+    Um resumo claro da estratégia, incluindo os objetivos da mensagem, tom e características do público.
+
+tarefa_gerar_conteudo_email:
+  description: >
+    Com base na estratégia, escreva uma linha de assunto e um corpo de e-mail que sejam persuasivos, integrem urgência e incluam uma chamada para ação clara.
+    Sua saída final deve seguir as melhores práticas de marketing por e-mail.
+  expected_output: >
+    Um objeto JSON contendo a linha de assunto e o texto do corpo.
+
+tarefa_estilizar_email:
+  description: >
+    Transforme o conteúdo do e-mail em HTML estilizado. Foque em destacar os elementos-chave, como a mensagem de urgência e a chamada para ação.
+    O HTML gerado deve ser um fragmento (sem a tag <html>) e deve ser otimizado para visualização em e-mails. 
+    Centralize o texto no meio da tela, utlize tags de formatação para destacar informações importantes e garanta que o layout seja responsivo.
+    Não utilize \n para quebras de linha, utilize as tags de quebra de linha do HTML <br>.
+  expected_output: >
+    Um objeto JSON contendo uma string com a linha de assunto e um fragmento de HTML estilizado contendo o corpo do e-mail

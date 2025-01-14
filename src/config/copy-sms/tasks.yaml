@@ -1,0 +1,66 @@
+promptBuilder_task:
+  description: >
+    Criar um prompt estruturado para gerar uma mensagem persuasiva e personalizada para uma campanha de SMS, considerando:
+    O objetivo da campanha que é: {objetivo_copy}
+    O tom de voz da comunicação: {tom_de_voz}
+    O público-alvo a ser atingido: {publico_alvo}
+    O segmento da loja é: {segmento_loja}
+  expected_output: >
+    Crie um prompt em português que oriente a criação de uma mensagem de SMS que será disparada para clientes de uma loja virtual do segmento {segmento_loja}, e deve seguir as seguintes diretrizes:
+    A mensagem deve ser direcionada para {publico_alvo}, o tom de voz da comunicação deve ser {tom_de_voz} e o objetivo da campanha é {objetivo_copy}.
+    O output final dever ser apenas o prompt estruturado, sem a copy final.
+  agent: promptBuilder
+
+variableSuggester_task:
+  description: >
+    Sugira variáveis internas da Zoppy que podem ser utilizadas em uma copy personalizada para uma campanha de SMS, considerando:
+    O objetivo da campanha: {objetivo_copy}
+    O tom de voz da comunicação: {tom_de_voz}
+    O público-alvo a ser atingido: {publico_alvo}
+
+    VARIÁVEIS DISPONÍVEIS:
+
+    CLIENTE
+    - [client_first_name]: Primeiro nome do cliente. Use para personalização básica.
+    - [client_last_name]: Sobrenome do cliente. Use para comunicações formais.
+    - [last_purchase_date]: Data da última compra. Ideal para reativação de clientes inativos.
+    - [birthday_day][birthday_month]: Dia e mês de aniversário. Use em campanhas comemorativas.
+    - [age]: Idade do cliente. Útil para segmentação por faixa etária.
+    - [product_list]: Lista de produtos da última compra. Use para cross-sell/upsell.
+
+    GIFTBACK
+    - [giftback_code]: Código do desconto. Essencial em campanhas de Giftback.
+    - [giftback_expiry_date]: Data de validade do Giftback. Cria senso de urgência.
+    - [giftback_amount]: Valor do Giftback. Comunica o benefício.
+    - [giftback_minimum_purchase_value]: Valor mínimo para uso. Explica condições.
+
+    PEDIDO
+    - [order_code]: Código do pedido. Use em confirmações e status.
+    - [abandoned_cart_url]: Link do carrinho abandonado. Para recuperação.
+
+    NPS
+    - [nps_link]: Link para avaliação. Use em pesquisas de satisfação.
+    - [nps_product_rating]: Nota do produto. Para feedback específico.
+    - [nps_service_rating]: Nota do serviço. Para feedback do atendimento.
+    - [nps_rating]: Nota geral. Para feedback geral.
+
+    EMPRESA
+    - [company_name]: Nome da empresa. Para reforçar a marca.
+    - [seller_coupon]: Cupom personalizado do vendedor. Para fidelização.
+    - [seller_name]: Nome do vendedor. Para atendimento personalizado.
+    - [store_url]: Link da loja. Para direcionar tráfego.
+
+  expected_output: >
+    Liste apenas as variáveis mais relevantes para este contexto, com breve justificativa para cada escolha.
+    Você só pode sugerir variáveis disponíveis na lista.
+    Em hipótese alguma, você deve criar variáveis novas ou criar exemplos de copys.
+  agent: variableSuggester
+
+copywriter_task:
+  description: >
+    Criar uma copy personalizada uma campanha de disparo via sms, utilizando variáveis como [client_first_name] e [store_url] dentre outras sugeridas pelo agente variableSuggester para personalização dinâmica. A copy deve ser direta, envolvente, adaptada ao público-alvo e respeitar o limite máximo de 145 caracteres. 
+  expected_output: >
+    Uma mensagem em português, com até 145 caracteres, que inclua variáveis apropriadas sugeridas pelo agente variableSuggester e se adapte ao contexto e tom de voz solicitado. 
+    As mensagens possuem um formato padrão e todas começam com "[company_name]:" uma vez que são enviadas em nome da empresa. 
+  agent: copywriter
+
