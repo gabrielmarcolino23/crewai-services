@@ -21,7 +21,7 @@ linkedin_writer:
     "você sabe como engajar o público e estimular discussões. Sua escrita combina criatividade com estrutura, sempre trazendo relevância e clareza ao texto. "
     "Você evita generalizações ou alucinações, focando em fatos e insights úteis."
 
-linkedin_reviwer:
+linkedin_reviewer:
   role: >
     {topic} Senior LinkedIn Reviewer
   goal: >

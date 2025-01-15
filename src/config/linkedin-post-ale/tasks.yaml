@@ -7,7 +7,7 @@ research_task:
     Uma lista com 3 a 5 tópicos relevantes sobre {topic}, cada um acompanhado de uma breve descrição explicando sua relevância.
   agent: researcher
 
-linkdin_writing_task:
+linkedin_writing_task:
   description: >
     Com base nos tópicos fornecidos pela pesquisa, escreva um post no LinkedIn
     que siga a estrutura: introdução cativante, desenvolvimento reflexivo e uma chamada à ação.
@@ -17,7 +17,7 @@ linkdin_writing_task:
     O tom deve ser descontraído, mas profissional, e engajar o leitor a interagir nos comentários.
   agent: linkedin_writer
 
-linkedin_reviwer_task:
+linkedin_reviewer_task:
   description: >
     Revise o post gerado pelo Writer e avalie sua clareza, tom, estrutura e engajamento.
     Identifique quaisquer problemas e sugira melhorias específicas. Se o texto estiver pronto
@@ -26,4 +26,4 @@ linkedin_reviwer_task:
     Feedback detalhado sobre o post, incluindo observações sobre clareza, tom, estrutura e engajamento.
     Se necessário, inclua sugestões de melhoria específicas. Caso o texto esteja adequado,
     forneça uma avaliação positiva indicando que está pronto para publicação.
-  agent: linkedin_reviwer
+  agent: linkedin_reviewer
