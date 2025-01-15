@@ -16,3 +16,6 @@ class emailInputs(BaseModel):
     publico_alvo: str
     segmento_loja: str
     template: str
+
+class linkedinInputs(BaseModel):
+    topic: str

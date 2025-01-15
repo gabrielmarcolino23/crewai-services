@@ -1,5 +1,5 @@
 import sys
-from segment_ai.crew import SegmentAiCrew
+from segment_builder_crew.crew import SegmentAiCrew
 
 def run():
     """

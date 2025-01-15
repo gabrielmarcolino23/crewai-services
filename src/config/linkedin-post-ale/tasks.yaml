@@ -1,0 +1,29 @@
+research_task:
+  description: >
+    Realize uma pesquisa detalhada sobre os temas mais atuais relacionados a {topic}.
+    Certifique-se de buscar informações relevantes e interessantes, com foco em tendências
+    e desenvolvimentos importantes para 2025.
+  expected_output: >
+    Uma lista com 3 a 5 tópicos relevantes sobre {topic}, cada um acompanhado de uma breve descrição explicando sua relevância.
+  agent: researcher
+
+linkdin_writing_task:
+  description: >
+    Com base nos tópicos fornecidos pela pesquisa, escreva um post no LinkedIn
+    que siga a estrutura: introdução cativante, desenvolvimento reflexivo e uma chamada à ação.
+    O texto deve ser envolvente, inspirador e adequado ao público-alvo do LinkedIn.
+  expected_output: >
+    Um post no LinkedIn com no máximo 300 palavras, incluindo introdução, desenvolvimento e conclusão.
+    O tom deve ser descontraído, mas profissional, e engajar o leitor a interagir nos comentários.
+  agent: linkedin_writer
+
+linkedin_reviwer_task:
+  description: >
+    Revise o post gerado pelo Writer e avalie sua clareza, tom, estrutura e engajamento.
+    Identifique quaisquer problemas e sugira melhorias específicas. Se o texto estiver pronto
+    para publicação, aprove sem alterações.
+  expected_output: >
+    Feedback detalhado sobre o post, incluindo observações sobre clareza, tom, estrutura e engajamento.
+    Se necessário, inclua sugestões de melhoria específicas. Caso o texto esteja adequado,
+    forneça uma avaliação positiva indicando que está pronto para publicação.
+  agent: linkedin_reviwer

@@ -6,7 +6,7 @@ import time
 import jwt
 import os
 import json
-from src.inputs.copy_input import Inputs, ReviewInputs
+from src.inputs.copy_input import Inputs, ReviewInputs, linkedinInputs
 from src.inputs.segment_input import InputSegment
 from src.inputs.campaing import CampaingInputs
 from datetime import datetime
@@ -323,13 +323,11 @@ async def generate_segment(
     
 @app.post("/generate/campaign")
 async def generate_campaign(
-    req: CampaingInputs, current_user: dict = Depends(get_current_user)
+    req: CampaingInputs
 ):
     try:
         start_time = time.time()
         from src.flows.campaing_flow.main import CampaingFlow
-
-        print(f"Usuário autenticado: {current_user.get('email')}")
 
         run_id = uuid4()
         print(f"Run ID: {run_id}")
@@ -350,6 +348,32 @@ async def generate_campaign(
     except Exception as e:
         print(e)
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/generate/linkedin")
+async def generate_linkedin(
+    req: linkedinInputs
+):
+    try:
+        start_time = time.time()
+        from src.crews.linkedin_ale_crew.crew import LinkedinPostAle
+
+        run_id = uuid4()
+        print(f"Run ID: {run_id}")
+
+        result = await LinkedinPostAle().crew().kickoff_async(inputs={
+            "topic": req.topic,
+        })
+
+        end_time = time.time()
+        execution_time = end_time - start_time
+
+        return {
+            "run_id": str(run_id),
+            "linkedin_output": result.raw,
+            "tempo_execucao": f"{execution_time}s",
+        }
+    except Exception as e:
+        return {"error": str(e)}
 
 if __name__ == "__main__":
     import uvicorn

@@ -10,11 +10,11 @@ promptBuilder:
 
 variableSuggester:
   role: >
-    Especialista em personalização de mensagens com variáveis Zoppy
+    Especialista em personalização de mensagens com variáveis 
   goal: >
     Sugerir as variáveis de personalização mais relevantes para campanhas de mensagens em massa, com base no objetivo, tom de voz e público-alvo da campanha. Estas variáveis devem ser aplicadas de forma a maximizar a personalização e o engajamento do cliente.
   backstory: >
-    Especialista em identificar as variáveis mais relevantes da Zoppy para cada tipo de campanha, 
+    Especialista em identificar as variáveis mais relevantes da plataforma para cada tipo de campanha, 
     sempre considerando o contexto, objetivo e público-alvo. Suas recomendações são precisas e 
     focadas apenas nas variáveis disponíveis na plataforma.
 

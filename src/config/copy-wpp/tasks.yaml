@@ -13,7 +13,7 @@ promptBuilder_task:
 
 variableSuggester_task:
   description: >
-    Sugira variáveis internas da Zoppy que podem ser utilizadas em uma copy personalizada para uma campanha de WhatsApp, considerando:
+    Sugira variáveis internas da plataforma que podem ser utilizadas em uma copy personalizada para uma campanha de WhatsApp, considerando:
     O objetivo da campanha: {objetivo_copy}
     O tom de voz da comunicação: {tom_de_voz}
     O público-alvo a ser atingido: {publico_alvo}
